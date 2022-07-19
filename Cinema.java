@@ -1,5 +1,6 @@
 package cinema;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Cinema {
@@ -19,23 +20,29 @@ public class Cinema {
         System.out.println("");
     }
 
+    public static char[][] createCinema(int n, int m) {
+        char[][] matrix = new char[n][m];
+        for (char[] i: matrix) {
+            Arrays.fill(i, 'S');
+        }
+        print(matrix);
+        return matrix;
+    }
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
         System.out.println("Enter the number of rows:");
         int numberOfRows = scanner.nextInt();
         System.out.println("Enter the number of seats in each row:");
         int numberOfSeats = scanner.nextInt();
-        char[][] cinema = new char[numberOfRows][numberOfSeats];
-        for (int i = 0; i < cinema.length; i++) {
-            for (int j = 0; j < cinema[i].length; j++) {
-                cinema[i][j] = 'S';
-            }
-        }
-        print(cinema);
+        char[][] cinema = createCinema(numberOfRows, numberOfSeats);
+
         System.out.println("Enter a row number:");
         int rowNumber = scanner.nextInt();
         System.out.println("Enter a seat number in that row:");
         int seatNumber = scanner.nextInt();
+
         int price = 10;
         if (numberOfRows * numberOfSeats > 60 && rowNumber > numberOfRows / 2) {
             price = 8;
