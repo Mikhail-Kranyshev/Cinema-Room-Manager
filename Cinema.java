@@ -3,6 +3,21 @@ package cinema;
 import java.util.Scanner;
 
 public class Cinema {
+    public static void print(char[][] matrix) {
+        System.out.print("\nCinema:\n ");
+        for (int i = 0; i < matrix[0].length; i++) {
+            System.out.print(" " + (i + 1));
+        }
+        System.out.println();
+        for (int i = 0; i < matrix.length; i++) {
+            System.out.print(i + 1);
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(" " + matrix[i][j]);
+            }
+            System.out.println("");
+        }
+        System.out.println("");
+    }
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -10,24 +25,23 @@ public class Cinema {
         int numberOfRows = scanner.nextInt();
         System.out.println("Enter the number of seats in each row:");
         int numberOfSeats = scanner.nextInt();
-        System.out.println("Total income:");
-        int price;
-        if (numberOfRows * numberOfSeats < 60) {
-            price = numberOfRows * numberOfSeats * 10;
-        } else {
-            int front = numberOfRows / 2;
-            int end = numberOfRows - front;
-            price = (front * numberOfSeats * 10) + end * numberOfSeats * 8;
+        char[][] cinema = new char[numberOfRows][numberOfSeats];
+        for (int i = 0; i < cinema.length; i++) {
+            for (int j = 0; j < cinema[i].length; j++) {
+                cinema[i][j] = 'S';
+            }
         }
-        System.out.println("$" + price);
-//        System.out.println("Cinema:\n" +
-//                "  1 2 3 4 5 6 7 8\n" +
-//                "1 S S S S S S S S\n" +
-//                "2 S S S S S S S S\n" +
-//                "3 S S S S S S S S\n" +
-//                "4 S S S S S S S S\n" +
-//                "5 S S S S S S S S\n" +
-//                "6 S S S S S S S S\n" +
-//                "7 S S S S S S S S");
+        print(cinema);
+        System.out.println("Enter a row number:");
+        int rowNumber = scanner.nextInt();
+        System.out.println("Enter a seat number in that row:");
+        int seatNumber = scanner.nextInt();
+        int price = 10;
+        if (numberOfRows * numberOfSeats > 60 && rowNumber > numberOfRows / 2) {
+            price = 8;
+        }
+        System.out.println("\nTicket price: $" + price);
+        cinema[rowNumber - 1][seatNumber - 1] = 'B';
+        print(cinema);
     }
 }
